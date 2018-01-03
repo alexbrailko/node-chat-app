@@ -25,6 +25,14 @@ class Users {
 
         return namesArray;
     }
+    getRoomsList () {
+        var allRooms = this.users.map(room => room.room);
+        var rooms = allRooms.filter(function (item, pos) {
+            return allRooms.indexOf(item) == pos;
+        })
+        //this.rooms.push(rooms);
+        return rooms;
+    }
 }
 
 module.exports = {Users};

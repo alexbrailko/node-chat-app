@@ -19,6 +19,7 @@ function scrollToBottom() {
 socket.on('connect', function() {
     var params = jQuery.deparam(window.location.search);
 
+    
     socket.emit('join', params, function(err) {
         if (err) {
             alert(err);
@@ -26,7 +27,9 @@ socket.on('connect', function() {
         } else {
             console.log('no error');
         }
+
     });
+
 });
 socket.on('disconnect', function() {
 
@@ -41,7 +44,6 @@ socket.on('updateUserList', function (users) {
 
     jQuery('#users').html(ol);
 });
-
 
 socket.on('newMessage', function(message) {
     var formattedTime = moment(message.createdAt).format('h:mm a');
@@ -67,6 +69,10 @@ socket.on('newLocationMessage', function (message) {
     jQuery('#messages').append(html);
     scrollToBottom();
 }); 
+
+socket.on('getActiveRooms', function (rooms) {
+    console.log(rooms);
+});
 
 jQuery('#message-form').on('submit', function(e) {
     e.preventDefault();
